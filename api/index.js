@@ -1,8 +1,4 @@
 const express = require('express')
-const axios = require('axios')
-
-const multer = require('multer')
-const upload = multer({dest: 'uploads/'})
 
 
 
@@ -30,21 +26,7 @@ app.post('/productos2', (req,res)=>{
     res.status(201).send(`<h2>Saludos: ${name} edad: ${age}</h2>`)
 })
 
-app.get('/post', async(req, res)=>{
-    const respuesta = await axios.get('https://jsonplaceholder.typicode.com/posts')
 
-    console.log(respuesta.data.length)
-
-    res.json(respuesta.data)
-})
-
-app.post('/imagen', upload.single('imagen'), (req,res)=>{
-
-    const imagen = req.file
-
-    console.log(imagen)
-    res.status(201).send('Saludos desde imagen')
-})
 
 
 app.get('/:name',(req,res)=>{
@@ -56,3 +38,5 @@ app.get('/:name',(req,res)=>{
 const PORT = process.env.PORT || 4000
 console.log(PORT)
 app.listen(PORT)
+
+export default app;
