@@ -1,14 +1,16 @@
 const express = require('express')
 
 
-
 const app = express()
 
 app.use(express.text())
 app.use(express.json())
+app.set('view engine' , 'ejs')
+
+app.use(express.static('public'))
 
 app.get('/',(req,res)=>{
-    res.status(201).send('<h1> Hola Mundo desde Express y desde Vercel!!</h1>')
+    res.status(201).render('home')
 })
 
 
@@ -16,7 +18,7 @@ app.post('/productos', (req,res)=>{
 
     const obj = req.body
 
-    res.status(201).json(obj)
+    res.status(201).render('home')
 })
 
 app.post('/productos2', (req,res)=>{
@@ -25,7 +27,6 @@ app.post('/productos2', (req,res)=>{
 
     res.status(201).send(`<h2>Saludos: ${name} edad: ${age}</h2>`)
 })
-
 
 
 
@@ -39,4 +40,4 @@ const PORT = process.env.PORT || 4000
 console.log(PORT)
 app.listen(PORT)
 
-export default app;
+module.exports = app;
